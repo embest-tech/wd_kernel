@@ -537,9 +537,12 @@ static void rx8025_sysfs_unregister(struct device *dev)
 static int __devinit rx8025_probe(struct i2c_client *client,
 				  const struct i2c_device_id *id)
 {
+<<<<<<< HEAD
 	printk("********************************\n");
 	printk("this is in rtc_rx8025 probe!!!!!\n");
 	printk("********************************\n");
+=======
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	struct i2c_adapter *adapter = to_i2c_adapter(client->dev.parent);
 	struct rx8025_data *rx8025;
 	int err, need_reset = 0;
@@ -582,9 +585,13 @@ static int __devinit rx8025_probe(struct i2c_client *client,
 		dev_err(&client->dev, "unable to register the class device\n");
 		goto errout_free;
 	}
+<<<<<<< HEAD
 	printk("********************************\n");
 	printk("after rtc_device_register!!!\n");
 	printk("********************************\n");
+=======
+
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	if (client->irq > 0) {
 		dev_info(&client->dev, "IRQ %d supplied\n", client->irq);
 		err = request_irq(client->irq, rx8025_irq,
@@ -599,9 +606,12 @@ static int __devinit rx8025_probe(struct i2c_client *client,
 	rx8025->rtc->max_user_freq = 1;
 
 	err = rx8025_sysfs_register(&client->dev);
+<<<<<<< HEAD
 	printk("********************************\n");
 	printk("rtc  probe  successfully!!!\n");
 	printk("********************************\n");
+=======
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	if (err)
 		goto errout_irq;
 
@@ -654,9 +664,12 @@ static struct i2c_driver rx8025_driver = {
 
 static int __init rx8025_init(void)
 {
+<<<<<<< HEAD
 	printk("********************************\n");
 	printk("this is in rx8025_rtc!!!\n");
 	printk("********************************\n");
+=======
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	return i2c_add_driver(&rx8025_driver);
 }
 

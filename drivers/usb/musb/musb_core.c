@@ -1573,7 +1573,11 @@ static irqreturn_t generic_interrupt(int irq, void *__hci)
 	musb->int_usb = musb_readb(musb->mregs, MUSB_INTRUSB);
 	musb->int_tx = musb_readw(musb->mregs, MUSB_INTRTX);
 	musb->int_rx = musb_readw(musb->mregs, MUSB_INTRRX);
+<<<<<<< HEAD
 //	printk("this is in musb irq_generic!!!!!!\n");
+=======
+
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	if (musb->int_usb || musb->int_tx || musb->int_rx)
 		retval = musb_interrupt(musb);
 
@@ -1603,10 +1607,13 @@ irqreturn_t musb_interrupt(struct musb *musb)
 	devctl = musb_readb(musb->mregs, MUSB_DEVCTL);
 	power = musb_readb(musb->mregs, MUSB_POWER);
 
+<<<<<<< HEAD
 	//printk(musb->controller, "** IRQ %s usb%04x tx%04x rx%04x\n",
 	//	(devctl & MUSB_DEVCTL_HM) ? "host" : "peripheral",
 	//	musb->int_usb, musb->int_tx, musb->int_rx);
 //	printk("this is in musb_interrupt!!!!!\n");
+=======
+>>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
 	dev_dbg(musb->controller, "** IRQ %s usb%04x tx%04x rx%04x\n",
 		(devctl & MUSB_DEVCTL_HM) ? "host" : "peripheral",
 		musb->int_usb, musb->int_tx, musb->int_rx);
