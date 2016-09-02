@@ -135,12 +135,7 @@
 #define MMC_AUTOSUSPEND_DELAY	100
 #define MMC_TIMEOUT_MS		20
 #define OMAP_MMC_MIN_CLOCK	400000
-<<<<<<< HEAD
 #define OMAP_MMC_MAX_CLOCK	25000000
-//#define OMAP_MMC_MAX_CLOCK	10000000
-=======
-#define OMAP_MMC_MAX_CLOCK	52000000
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 #define DRIVER_NAME		"omap_hsmmc"
 
 /*
@@ -726,10 +721,6 @@ static int omap_hsmmc_context_restore(struct omap_hsmmc_host *host)
 		if (context_loss < 0)
 			return 1;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	dev_dbg(mmc_dev(host->mmc), "context was %slost\n",
 		context_loss == host->context_loss ? "not " : "");
 	if (host->context_loss == context_loss)
@@ -1322,10 +1313,6 @@ static void omap_hsmmc_protect_card(struct omap_hsmmc_host *host)
  */
 static void omap_hsmmc_detect(struct work_struct *work)
 {
-<<<<<<< HEAD
-	
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	struct omap_hsmmc_host *host =
 		container_of(work, struct omap_hsmmc_host, mmc_carddetect_work);
 	struct omap_mmc_slot_data *slot = &mmc_slot(host);
@@ -1916,10 +1903,6 @@ static void omap_hsmmc_debugfs(struct mmc_host *mmc)
 
 static int __init omap_hsmmc_probe(struct platform_device *pdev)
 {
-<<<<<<< HEAD
-	
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	struct omap_mmc_platform_data *pdata = pdev->dev.platform_data;
 	struct mmc_host *mmc;
 	struct omap_hsmmc_host *host = NULL;
@@ -1935,10 +1918,6 @@ static int __init omap_hsmmc_probe(struct platform_device *pdev)
 		dev_err(&pdev->dev, "No Slots\n");
 		return -ENXIO;
 	}
-<<<<<<< HEAD
-=======
-
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	res = platform_get_resource(pdev, IORESOURCE_MEM, 0);
 	irq = platform_get_irq(pdev, 0);
 	if (res == NULL || irq < 0)

@@ -322,10 +322,6 @@ EXPORT_SYMBOL(mmc_alloc_host);
 int mmc_add_host(struct mmc_host *host)
 {
 	int err;
-<<<<<<< HEAD
-=======
-
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	WARN_ON((host->caps & MMC_CAP_SDIO_IRQ) &&
 		!host->ops->enable_sdio_irq);
 

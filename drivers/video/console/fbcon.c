@@ -368,11 +368,7 @@ static void fbcon_update_softback(struct vc_data *vc)
 
 static void fb_flashcursor(struct work_struct *work)
 {
-<<<<<<< HEAD
 /*	struct fb_info *info = container_of(work, struct fb_info, queue);
-=======
-	struct fb_info *info = container_of(work, struct fb_info, queue);
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	struct fbcon_ops *ops = info->fbcon_par;
 	struct vc_data *vc = NULL;
 	int c;
@@ -395,10 +391,7 @@ static void fb_flashcursor(struct work_struct *work)
 	ops->cursor(vc, info, mode, softback_lines, get_color(vc, info, c, 1),
 		    get_color(vc, info, c, 0));
 	console_unlock();
-<<<<<<< HEAD
 */
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 }
 
 static void cursor_timer_handler(unsigned long dev_addr)

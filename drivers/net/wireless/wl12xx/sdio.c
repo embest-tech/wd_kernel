@@ -111,16 +111,10 @@ static void wl1271_sdio_raw_read(struct wl1271 *wl, int addr, void *buf,
 {
 	int ret;
 	struct sdio_func *func = wl_to_func(wl);
-<<<<<<< HEAD
-=======
 
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	if (unlikely(addr == HW_ACCESS_ELP_CTRL_REG_ADDR)) {
 		((u8 *)buf)[0] = sdio_f0_readb(func, addr, &ret);
 		wl1271_debug(DEBUG_SDIO, "sdio read 52 addr 0x%x, byte 0x%02x",
-			     addr, ((u8 *)buf)[0]);
-<<<<<<< HEAD
-		printk("sdio read 52 addr 0x%x, byte 0x%02x",
 			     addr, ((u8 *)buf)[0]);
 	} else {
 		if (fixed)
@@ -133,9 +127,6 @@ static void wl1271_sdio_raw_read(struct wl1271 *wl, int addr, void *buf,
 		printk("ret:%d\n",ret);
 		wl1271_debug(DEBUG_SDIO, "sdio read 53 addr 0x%x, %zu bytes",
 			     addr, len);
-		printk("sdio read 53 addr 0x%x, %zu bytes",
-			     addr, len);
-=======
 	} else {
 		if (fixed)
 			ret = sdio_readsb(func, buf, addr, len);
@@ -144,7 +135,6 @@ static void wl1271_sdio_raw_read(struct wl1271 *wl, int addr, void *buf,
 
 		wl1271_debug(DEBUG_SDIO, "sdio read 53 addr 0x%x, %zu bytes",
 			     addr, len);
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 		wl1271_dump_ascii(DEBUG_SDIO, "data: ", buf, len);
 	}
 

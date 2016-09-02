@@ -985,10 +985,6 @@ endchoice
 # Kconfigs may be included either alphabetically (according to the
 # plat- suffix) or along side the corresponding mach-* source.
 #
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 source "arch/arm/mach-at91/Kconfig"
 
 source "arch/arm/mach-bcmring/Kconfig"
@@ -1041,8 +1037,6 @@ source "arch/arm/mach-netx/Kconfig"
 
 source "arch/arm/mach-nomadik/Kconfig"
 source "arch/arm/plat-nomadik/Kconfig"
->>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 
 source "arch/arm/plat-omap/Kconfig"
 
@@ -1050,10 +1044,6 @@ source "arch/arm/mach-omap1/Kconfig"
 
 source "arch/arm/mach-omap2/Kconfig"
 
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
-=======
 source "arch/arm/mach-orion5x/Kconfig"
 
 source "arch/arm/mach-pxa/Kconfig"
@@ -1109,8 +1099,6 @@ source "arch/arm/plat-versatile/Kconfig"
 source "arch/arm/mach-vt8500/Kconfig"
 
 source "arch/arm/mach-w90x900/Kconfig"
->>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 
 # Definitions to make life easier
 config ARCH_ACORN

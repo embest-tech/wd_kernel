@@ -187,23 +187,16 @@ mmc_start_request(struct mmc_host *host, struct mmc_request *mrq)
 	unsigned int i, sz;
 	struct scatterlist *sg;
 #endif
-<<<<<<< HEAD
 //	printk("%s: starting CMD%u arg %08x flags %08x\n",
 //		 mmc_hostname(host), mrq->cmd->opcode,
 //		 mrq->cmd->arg, mrq->cmd->flags);
-=======
-
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	pr_debug("%s: starting CMD%u arg %08x flags %08x\n",
 		 mmc_hostname(host), mrq->cmd->opcode,
 		 mrq->cmd->arg, mrq->cmd->flags);
 
 	if (mrq->data) {
 		pr_debug("%s:     blksz %d blocks %d flags %08x "
-<<<<<<< HEAD
 	//	printk("%s:     blksz %d blocks %d flags %08x "
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 			"tsac %d ms nsac %d\n",
 			mmc_hostname(host), mrq->data->blksz,
 			mrq->data->blocks, mrq->data->flags,
@@ -213,10 +206,7 @@ mmc_start_request(struct mmc_host *host, struct mmc_request *mrq)
 
 	if (mrq->stop) {
 		pr_debug("%s:     CMD%u arg %08x flags %08x\n",
-<<<<<<< HEAD
 	//	printk("%s:     CMD%u arg %08x flags %08x\n",
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 			 mmc_hostname(host), mrq->stop->opcode,
 			 mrq->stop->arg, mrq->stop->flags);
 	}
@@ -497,10 +487,7 @@ void mmc_set_data_timeout(struct mmc_data *data, const struct mmc_card *card)
 	 */
 	if (mmc_card_sdio(card)) {
 		data->timeout_ns = 1000000000;
-<<<<<<< HEAD
 //		data->timeout_ns = 2000000000;
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 		data->timeout_clks = 0;
 		return;
 	}

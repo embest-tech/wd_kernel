@@ -164,10 +164,6 @@ int mmc_io_rw_extended(struct mmc_card *card, int write, unsigned fn,
 	mmc_set_data_timeout(&data, card);
 
 	mmc_wait_for_req(card->host, &mrq);
-<<<<<<< HEAD
-=======
-
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 	if (cmd.error)
 		return cmd.error;
 	if (data.error)

@@ -262,16 +262,7 @@ static struct da8xx_panel known_lcd_panels[] = {
 	/* ThreeFive S9700RTWV35TR */
 	[2] = {
 		.name = "TFC_S9700RTWV35TR_01B",
-<<<<<<< HEAD
 		.width = 800,
-=======
-<<<<<<< HEAD
-		.width = 800,
-=======
-//		.width = 800,
-		.width = 640,
->>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
 		.height = 480,
 		.hfp = 39,
 		.hbp = 39,
@@ -298,40 +289,8 @@ static struct da8xx_panel known_lcd_panels[] = {
 	},
         [4] = {
                 .name = "4.3inch_LCD",
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
-        //        .width = 480,
-        //        .height = 272,
                 .width = 640,
                 .height = 480,
-       /*        .hfp = 2,
-<<<<<<< HEAD
-=======
-=======
-                .width = 480,
-                .height = 272,
-                .hfp = 2,
->>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
-                .hbp = 2,
-                .hsw = 41,
-                .vfp = 2,
-                .vbp = 2,
-                .vsw = 10,
-<<<<<<< HEAD
-=======
-<<<<<<< HEAD
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
-        
-                .hfp = 1,
-                .hbp = 1,
-                .hsw = 48,
-                .vfp = 12,
-                .vbp = 25,
-                .vsw = 3,
-	*/
                 .hfp = 39,
                 .hbp = 39,
                 .hsw = 47,
@@ -339,13 +298,6 @@ static struct da8xx_panel known_lcd_panels[] = {
                 .vbp = 29,
                 .vsw = 2,
         	.pxl_clk = 25000000,
-        	.pxl_clk = 25000000,
-<<<<<<< HEAD
-=======
-=======
-                .pxl_clk = 9600000,
->>>>>>> 034ae35db541996ff9febab61f8b0453c64214dc
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
                 .invert_pxl_clk = 0,
         },
         [5] = {

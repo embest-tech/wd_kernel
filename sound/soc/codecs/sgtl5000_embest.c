@@ -564,7 +564,7 @@ static int sgtl5000_pcm_hw_params(struct snd_pcm_substream *substream,
 static int sgtl5000_set_bias_level(struct snd_soc_codec *codec,
 				   enum snd_soc_bias_level level)
 {
-	/*printk("--------sgtl5000_set_bias_level %d\n", level);*/
+	printk("--------sgtl5000_set_bias_level %d\n", level);
 
 	if (codec->dapm.bias_level == level)
 		return 0;
@@ -778,10 +778,7 @@ static int sgtl5000_power_init(struct snd_soc_codec *codec)
         tmp |= SGTL5000_ADC_POWERUP;
         tmp |= SGTL5000_DAC_POWERUP;
         tmp |= SGTL5000_HP_POWERUP;
-<<<<<<< HEAD
         tmp |= SGTL5000_LINE_OUT_POWERUP;
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
         snd_soc_write(codec, SGTL5000_CHIP_ANA_POWER, tmp);
 
         tmp = snd_soc_read(codec, SGTL5000_CHIP_DIG_POWER);
@@ -795,11 +792,8 @@ static int sgtl5000_power_init(struct snd_soc_codec *codec)
         tmp = snd_soc_read(codec, SGTL5000_CHIP_ANA_CTRL);
         tmp |= SGTL5000_HP_ZCD_EN;
         tmp |= SGTL5000_ADC_ZCD_EN;
-<<<<<<< HEAD
 	tmp |= SGTL5000_LINE_OUT_MUTE;
 	tmp |= SGTL5000_ADC_MUTE;
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
         snd_soc_write(codec, SGTL5000_CHIP_ANA_CTRL, tmp);
 
 	return 0;
@@ -812,26 +806,17 @@ static int sgtl5000_power_up(struct snd_soc_codec *codec)
         tmp = snd_soc_read(codec, SGTL5000_CHIP_ANA_POWER);
         tmp |= SGTL5000_DAC_STEREO;
         tmp &= ~SGTL5000_ADC_STEREO;
-<<<<<<< HEAD
-        
-=======
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
         tmp |= SGTL5000_VAG_POWERUP;
         snd_soc_write(codec, SGTL5000_CHIP_ANA_POWER, tmp);
 
 	snd_soc_write(codec, SGTL5000_CHIP_MIC_CTRL, 0x231);
 
         tmp = snd_soc_read(codec, SGTL5000_CHIP_ANA_CTRL);
-<<<<<<< HEAD
-       // tmp &= ~SGTL5000_ADC_MUTE;
-        tmp |= SGTL5000_ADC_MUTE;
-       tmp &= ~SGTL5000_HP_MUTE;
-//SGTL5000_LINE_OUT_MUTE
+
+	// tmp &= ~SGTL5000_ADC_MUTE;
+	tmp |= SGTL5000_ADC_MUTE;
+	tmp &= ~SGTL5000_HP_MUTE;
         tmp &= ~SGTL5000_LINE_OUT_MUTE;
-=======
-        tmp &= ~SGTL5000_ADC_MUTE;
-        tmp &= ~SGTL5000_HP_MUTE;
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
         snd_soc_write(codec, SGTL5000_CHIP_ANA_CTRL, tmp);
 
 	return 0;
@@ -841,11 +826,7 @@ static int sgtl5000_probe(struct snd_soc_codec *codec)
 {
 	int ret;
 
-<<<<<<< HEAD
-	printk("--------sgtl5000_probe\n");
-=======
-	/*printk("--------sgtl5000_probe\n");*/
->>>>>>> ab8a39e65cef3b872d660a0885a0114686205cb7
+	printk("--------sgtl5000_probe--------\n");
 
 	/* setup i2c data ops */
 	ret = snd_soc_codec_set_cache_io(codec, 16, 16, SND_SOC_I2C);
@@ -914,7 +895,6 @@ static __devinit int sgtl5000_i2c_probe(struct i2c_client *client,
 {
 	struct sgtl5000_priv *sgtl5000;
 	int ret;
-
 	sgtl5000 = kzalloc(sizeof(struct sgtl5000_priv), GFP_KERNEL);
 	if (!sgtl5000)
 		return -ENOMEM;
