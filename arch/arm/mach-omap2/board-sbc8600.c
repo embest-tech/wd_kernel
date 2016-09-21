@@ -531,6 +531,11 @@ static struct pinmux_config usb1_pin_mux[] = {
 	{NULL, 0},
 };
 
+static struct pinmux_config ecap2_pin_mux[] = {
+	{"mcasp0_ahclkr.ecap2_in_pwm2_out", OMAP_MUX_MODE4 | AM33XX_PIN_OUTPUT},
+	{NULL, 0},
+};
+
 /* Module pin mux for uart1 */
 static struct pinmux_config uart1_pin_mux[] = {
         {"uart1_rxd.uart1_rxd", OMAP_MUX_MODE0 | AM33XX_PIN_INPUT_PULLUP},
@@ -586,6 +591,13 @@ static struct pinmux_config wl12xx_pin_mux[] =
 };
 
 static bool backlight_enable;
+
+static void enable_ecap2(int evm_id, int profile)
+{
+	backlight_enable = true;
+	setup_pin_mux(ecap2_pin_mux);
+}
+
 /* Setup pwm-backlight */
 static struct platform_device am335x_backlight = {
 	.name           = "pwm-backlight",
@@ -958,6 +970,7 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{evm_nand_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{rgmii1_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{lcdc_init,     DEV_ON_BASEBOARD, PROFILE_ALL},
+	{enable_ecap2,	DEV_ON_BASEBOARD, PROFILE_ALL},
 	{tsc_init,      DEV_ON_BASEBOARD, PROFILE_ALL},
 	{mcasp0_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{usb0_init,     DEV_ON_BASEBOARD, PROFILE_ALL},
