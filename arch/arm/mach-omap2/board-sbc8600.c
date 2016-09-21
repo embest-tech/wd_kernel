@@ -935,10 +935,12 @@ static void mmc0_init(int evm_id, int profile)
 	return;
 }
 
+
 static struct gpio_led gpio_leds[] = {
         {
-                .name                   = "sys_led",
-                .default_trigger        = "heartbeat",
+		.name                   = "3GEnable",
+		.default_trigger        = "none",
+		// W_DISABLE GPIO
                 .gpio                   = GPIO_TO_PIN(1, 30),
         },
 };

@@ -808,7 +808,7 @@ static int _omap4_disable_module(struct omap_hwmod *oh)
 
 	v = _omap4_wait_target_disable(oh);
 	if (v)
-		pr_warn("omap_hwmod: %s: _wait_target_disable failed\n",
+		pr_warn_once("omap_hwmod: %s: _wait_target_disable failed\n",
 				oh->name);
 
 	return 0;
