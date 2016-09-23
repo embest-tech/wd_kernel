@@ -577,11 +577,15 @@ static struct pinmux_config mmc2_wl12xx_pin_mux[] = {
 	{"gpmc_clk.mmc2_clk",   OMAP_MUX_MODE3 | AM33XX_PIN_INPUT_PULLUP},
 	{NULL, 0},
 };
+
 static struct pinmux_config uart5_wl12xx_pin_mux[] = {
         {"mii1_col.uart5_rxd",     OMAP_MUX_MODE3 | AM33XX_PIN_INPUT_PULLUP},
         {"rmii1_refclk.uart5_txd", OMAP_MUX_MODE3 | AM33XX_PIN_OUTPUT},
+	{"mmc0_dat0.uart5_rtsn",   OMAP_MUX_MODE2 | AM33XX_PIN_OUTPUT},
+	{"mmc0_dat1.uart5_ctsn",   OMAP_MUX_MODE2 | AM33XX_PIN_INPUT},
 	{NULL, 0},
 };
+
 static struct pinmux_config wl12xx_pin_mux[] =
  {
         {"gpmc_a4.gpio1_20",   OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT_PULLUP},
@@ -853,8 +857,7 @@ static void mmc2_wl12xx_init(int evm_id, int profile)
 	am335x_mmc[1].nonremovable = true;
 	am335x_mmc[1].gpio_cd = -EINVAL;
 	am335x_mmc[1].gpio_wp = -EINVAL;
-	am335x_mmc[1].ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34 | MMC_VDD_165_195 | MMC_VDD_30_31; /* 3V3 */
-	// am335x_mmc[1].ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34; /* 3V3 */
+	am335x_mmc[1].ocr_mask = MMC_VDD_32_33 | MMC_VDD_33_34; /* 3V3 */
 
 	/* mmc will be initialized when mmc0_init is called */
 	return;
@@ -981,8 +984,14 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{uart2_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
 	{uart3_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
 	{mmc2_wl12xx_init,  DEV_ON_BASEBOARD, PROFILE_ALL},
-	{uart5_wl12xx_init, DEV_ON_BASEBOARD, PROFILE_ALL},
+	/*
+	 * warning, uart5 and mmc0 pinmux conflict
+	 *
+	 * so pinmux of mmc0_dat0,mmc0_dat1 depends the setup sequence
+	 * tary, 2016/09/23
+	 */
 	{mmc0_init,     DEV_ON_BASEBOARD, PROFILE_ALL},
+	{uart5_wl12xx_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{wl12xx_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{gpio_led_init, DEV_ON_BASEBOARD, PROFILE_ALL},
         {NULL, 0, 0},
