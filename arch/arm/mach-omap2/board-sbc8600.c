@@ -60,7 +60,7 @@
 #include <plat/mmc.h>
 #include <plat/emif.h>
 #include <plat/nand.h>
-
+#include <linux/memblock.h>
 #include "board-flash.h"
 #include "cpuidle33xx.h"
 #include "mux.h"
@@ -628,6 +628,9 @@ static int __init backlight_init(void)
         int status = 0;
         int ecap_index = 2;
 
+	//let enable_ecap2 and backlight_init excute at the same time,so that screen flash very short time
+	enable_ecap2(DEV_ON_BASEBOARD,PROFILE_ALL);
+
         if (backlight_enable) {
                 /*
                  * Invert polarity of PWM wave from ECAP to handle
@@ -975,7 +978,7 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{evm_nand_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{rgmii1_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{lcdc_init,     DEV_ON_BASEBOARD, PROFILE_ALL},
-	{enable_ecap2,	DEV_ON_BASEBOARD, PROFILE_ALL},
+	//{enable_ecap2,	DEV_ON_BASEBOARD, PROFILE_ALL},
 	{tsc_init,      DEV_ON_BASEBOARD, PROFILE_ALL},
 	{mcasp0_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{usb0_init,     DEV_ON_BASEBOARD, PROFILE_ALL},
@@ -1242,8 +1245,25 @@ static void __init sbc8600_map_io(void)
 	omapam33xx_map_common_io();
 }
 
+/* reserve 10M for VIDEO_BUFFER,from 9f600000-a0000000 */
+static void __init sbc8600_reserve(void) {
+#define BUF_TOP		0xA0000000
+#define BUF_10M		(10*1024*1024)
+#define BUF_BASE	(BUF_TOP-BUF_10M)
+	u32 paddr,size;
+
+	paddr = BUF_BASE;
+	size = BUF_10M;
+	if (memblock_reserve(paddr, size) < 0) {
+		pr_err("failed to reserve DRAM - no memory\n");
+		return;
+	}
+	printk("reserve : reserve %dM,,from 0x%x-0x%x\n", size>>20,BUF_BASE,BUF_TOP);
+}
+
 MACHINE_START(SBC8600, "sbc8600")
 	.atag_offset	= 0x100,
+	.reserve    	= sbc8600_reserve,
 	.map_io		= sbc8600_map_io,
 	.init_early	= am33xx_init_early,
 	.init_irq	= ti81xx_init_irq,

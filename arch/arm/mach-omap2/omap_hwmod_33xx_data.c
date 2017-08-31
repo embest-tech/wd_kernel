@@ -1318,7 +1318,7 @@ static struct omap_hwmod am33xx_gpio3_hwmod = {
 	.clkdm_name	= "l4ls_clkdm",
 	.mpu_irqs	= am33xx_gpio3_irqs,
 	.main_clk	= "gpio3_ick",
-	.flags		= HWMOD_CONTROL_OPT_CLKS_IN_RESET,
+	.flags		= HWMOD_INIT_NO_RESET, //don't reset/reinit here,init in u-boot
 	.prcm		= {
 		.omap4	= {
 			.clkctrl_offs	= AM33XX_CM_PER_GPIO3_CLKCTRL_OFFSET,
@@ -1711,7 +1711,7 @@ static struct omap_hwmod am33xx_lcdc_hwmod = {
 	},
 	.slaves		= am33xx_lcdc_slaves,
 	.slaves_cnt	= ARRAY_SIZE(am33xx_lcdc_slaves),
-	.flags		= (HWMOD_SWSUP_SIDLE | HWMOD_SWSUP_MSTANDBY),
+	.flags		= HWMOD_INIT_NO_RESET, //don't reset/reinit here,init in u-boot
 };
 
 /*

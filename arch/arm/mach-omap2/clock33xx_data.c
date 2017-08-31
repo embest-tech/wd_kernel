@@ -448,6 +448,7 @@ static struct clk disp_pll_clk = {
 	.parent		= &dpll_disp_m2_ck,
 	.ops		= &clkops_null,
 	.recalc		= &followparent_recalc,
+	.flags		= ENABLE_ON_INIT,
 };
 
 /* DPLL_PER */
@@ -1689,6 +1690,7 @@ static struct clk gpio3_dbclk = {
 	.enable_bit	= AM33XX_OPTFCLKEN_GPIO_3_GDBCLK_SHIFT,
 	.ops		= &clkops_omap2_dflt,
 	.recalc		= &followparent_recalc,
+	.flags		= ENABLE_ON_INIT,
 };
 
 static struct clk gpio3_ick = {
@@ -1699,6 +1701,7 @@ static struct clk gpio3_ick = {
 	.enable_bit	= AM33XX_MODULEMODE_SWCTRL,
 	.ops		= &clkops_omap2_dflt,
 	.recalc		= &followparent_recalc,
+	.flags		= ENABLE_ON_INIT,
 };
 
 static const struct clksel pruss_ocp_clk_mux_sel[] = {

@@ -1447,11 +1447,19 @@ static int __devinit fb_probe(struct platform_device *device)
 	ulcm = lcm((lcdc_info->width * lcd_cfg->bpp)/8, PAGE_SIZE);
 	par->vram_size = roundup(par->vram_size/8, ulcm);
 	par->vram_size = par->vram_size * LCD_NUM_BUFFERS;
-
+#if 0
 	par->vram_virt = dma_alloc_coherent(NULL,
 					    par->vram_size,
 					    (resource_size_t *) &par->vram_phys,
 					    GFP_KERNEL | GFP_DMA);
+#else	//allcate frame buffer in certain address
+#define BUF_TOP		0xA0000000
+#define BUF_10M		(10*1024*1024)
+#define BUF_BASE	(BUF_TOP-BUF_10M)
+	par->vram_phys = BUF_BASE;
+	if(!request_mem_region(BUF_BASE,BUF_10M, "video_buf_reserve")) return -EBUSY;
+	par->vram_virt = ioremap_nocache(BUF_BASE, BUF_10M);
+#endif
 	if (!par->vram_virt) {
 		dev_err(&device->dev,
 			"GLCD: kmalloc for frame buffer failed\n");
