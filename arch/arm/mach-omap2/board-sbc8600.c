@@ -556,6 +556,13 @@ static struct pinmux_config uart3_pin_mux[] = {
         {NULL, 0},
 };
 
+/* Module pin mux for uart4 */
+static struct pinmux_config uart4_pin_mux[] = {
+        {"uart0_ctsn.uart4_rxd", OMAP_MUX_MODE1 | AM33XX_PIN_INPUT_PULLUP},
+        {"uart0_rtsn.uart4_txd", OMAP_MUX_MODE1 | AM33XX_PULL_ENBL},
+        {NULL, 0},
+};
+
 #define AM335XEVM_WLAN_PMENA_GPIO	GPIO_TO_PIN(1, 31)
 #define AM335XEVM_WLAN_IRQ_GPIO		GPIO_TO_PIN(1, 24)
 
@@ -850,6 +857,13 @@ static void uart3_init(int evm_id, int profile)
         return;
 }
 
+static void uart4_init(int evm_id, int profile)
+{
+        /* Configure Uart4*/
+        setup_pin_mux(uart4_pin_mux);
+        return;
+}
+
 static void mmc2_wl12xx_init(int evm_id, int profile)
 {
 	setup_pin_mux(mmc2_wl12xx_pin_mux);
@@ -986,6 +1000,7 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{uart1_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
 	{uart2_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
 	{uart3_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
+	{uart4_init,    DEV_ON_BASEBOARD, PROFILE_ALL},
 	{mmc2_wl12xx_init,  DEV_ON_BASEBOARD, PROFILE_ALL},
 	/*
 	 * warning, uart5 and mmc0 pinmux conflict
