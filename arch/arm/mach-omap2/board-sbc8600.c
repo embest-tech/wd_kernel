@@ -988,6 +988,17 @@ static void gpio_led_init(int evm_id, int profile)
 		pr_err("failed to register gpio led device\n");
 }
 
+static struct pinmux_config card_pin_mux[] = {
+	{"xdma_event_intr0.gpio0_19",OMAP_MUX_MODE7 | AM33XX_PIN_INPUT},//used as a input gpio,1-no card,0-have card
+	{"gpmc_a6.gpio1_22",         OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT},
+	{"mcasp0_fsr.gpio3_19",      OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT},
+	{NULL, 0},
+};
+
+static void card_init(void){
+	setup_pin_mux(card_pin_mux);
+}
+
 static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{evm_nand_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{rgmii1_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
@@ -1012,6 +1023,7 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{uart5_wl12xx_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{wl12xx_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{gpio_led_init, DEV_ON_BASEBOARD, PROFILE_ALL},
+	{card_init, DEV_ON_BASEBOARD, PROFILE_ALL},
         {NULL, 0, 0},
 };
 
