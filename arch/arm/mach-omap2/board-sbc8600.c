@@ -674,7 +674,7 @@ static void lcdc_init(int evm_id, int profile)
 	struct da8xx_lcdc_platform_data *lcdc_pdata = NULL;
 	int i;
 
-	if (conf_disp_pll(300000000)) {
+	if (conf_disp_pll(227000000)) {	//min:227000000,max:275000000
 		pr_info("Failed configure display PLL, not attempting to"
 				"register LCDC\n");
 		return;
