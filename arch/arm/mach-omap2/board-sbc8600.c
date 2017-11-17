@@ -1072,7 +1072,7 @@ static struct i2c_board_info __initdata am335x_i2c0_boardinfo[] = {
 	{
 		I2C_BOARD_INFO("sgtl5000", 0x0A),
 	},
-#if defined(CONFIG_VGA_CH7033)
+#if 0
         {
                 I2C_BOARD_INFO("ch7033", 0x76),
         },

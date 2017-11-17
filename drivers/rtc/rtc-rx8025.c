@@ -26,7 +26,7 @@
 #include <linux/i2c.h>
 #include <linux/list.h>
 #include <linux/rtc.h>
-
+#include <linux/delay.h>
 /* Register definitions */
 #define RX8025_REG_SEC		0x00
 #define RX8025_REG_MIN		0x01
@@ -269,6 +269,7 @@ static int rx8025_init_client(struct i2c_client *client, int *need_reset)
 	int err;
 
 	err = rx8025_read_regs(rx8025->client, RX8025_REG_CTRL1, 2, ctrl);
+	printk("delay 60us ...\n");udelay(60);
 	if (err)
 		goto out;
 
@@ -309,6 +310,7 @@ static int rx8025_init_client(struct i2c_client *client, int *need_reset)
 		ctrl2 |= RX8025_BIT_CTRL2_XST;
 
 		err = rx8025_write_reg(client, RX8025_REG_CTRL2, ctrl2);
+		printk("delay 60us ...\n");udelay(60);
 	}
 out:
 	return err;
@@ -326,10 +328,12 @@ static int rx8025_read_alarm(struct device *dev, struct rtc_wkalrm *t)
 		return -EINVAL;
 
 	err = rx8025_read_regs(client, RX8025_REG_ALDMIN, 2, ald);
+	printk("delay 60us ...\n");udelay(60);
 	if (err)
 		return err;
 
 	err = rx8025_read_reg(client, RX8025_REG_CTRL2, &ctrl2);
+	printk("delay 60us ...\n");udelay(60);
 	if (err)
 		return err;
 
@@ -570,6 +574,7 @@ static int __devinit rx8025_probe(struct i2c_client *client,
 			 "bad conditions detected, resetting date\n");
 		rtc_time_to_tm(0, &tm);	/* 1970/1/1 */
 		rx8025_set_time(&client->dev, &tm);
+		printk("delay 60us ...\n");udelay(60);
 	}
 
 	rx8025->rtc = rtc_device_register(client->name, &client->dev,
