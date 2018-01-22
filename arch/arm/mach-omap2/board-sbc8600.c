@@ -310,8 +310,8 @@ static struct pinmux_config lcdc_pin_mux[] = {
 	{"gpmc_ad9.lcd_data17",		OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad10.lcd_data18",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad11.lcd_data19",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
-	{"gpmc_ad12.lcd_data20",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
-	{"gpmc_ad13.lcd_data21",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
+//	{"gpmc_ad12.lcd_data20",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
+//	{"gpmc_ad13.lcd_data21",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad14.lcd_data22",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad15.lcd_data23",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"lcd_vsync.lcd_vsync",		OMAP_MUX_MODE0 | AM33XX_PIN_OUTPUT},
@@ -359,8 +359,8 @@ static struct pinmux_config lcdc_lvds_pin_mux[] = {
 	{"gpmc_ad9.lcd_data17",		OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad10.lcd_data18",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad11.lcd_data19",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
-	{"gpmc_ad12.lcd_data20",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
-	{"gpmc_ad13.lcd_data21",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
+//	{"gpmc_ad12.lcd_data20",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
+//	{"gpmc_ad13.lcd_data21",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad14.lcd_data22",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"gpmc_ad15.lcd_data23",	OMAP_MUX_MODE1 | AM33XX_PIN_OUTPUT},
 	{"lcd_vsync.gpio2_22",          OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT},
@@ -652,6 +652,20 @@ static int __init backlight_init(void)
 }
 late_initcall(backlight_init);
 
+/* pwm beeper */
+static struct pinmux_config beeper_pin_mux[] = {
+	{"gpmc_ad12.gpio1_12", OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT},
+	{NULL, 0},
+};
+
+static void beeper_init(int evm_id, int profile){
+       unsigned nr = GPIO_TO_PIN(1, 12);
+
+       setup_pin_mux(beeper_pin_mux);
+       if( gpio_request(nr, "beeper") >= 0 ) gpio_direction_output(nr, 0);
+       else printk("beeper gpio_request failed\n");
+}
+
 static int __init conf_disp_pll(int rate)
 {
 	struct clk *disp_pll;
@@ -835,6 +849,19 @@ static void mcasp0_init(int evm_id, int profile)
         am335x_register_mcasp(&am335x_snd_data0, 0);
 
         return;
+}
+
+static struct pinmux_config lcdpwr_pin_mux[] = {
+	{"gpmc_ad13.gpio1_13",	OMAP_MUX_MODE7 | AM33XX_PIN_OUTPUT},
+	{NULL, 0},
+};
+
+static void enbale_lcd_power(int evm_id, int profile){
+	unsigned nr = GPIO_TO_PIN(1, 13);
+
+	setup_pin_mux(lcdpwr_pin_mux);
+	if( gpio_request(nr, "lcdpwr") >= 0 ) gpio_direction_output(nr, 1);
+	else printk("lcdpwr gpio_request failed\n");
 }
 
 static void uart1_init(int evm_id, int profile)
@@ -1024,6 +1051,8 @@ static struct evm_dev_cfg sbc8600_dev_cfg[] = {
 	{wl12xx_init,   DEV_ON_BASEBOARD, PROFILE_ALL},
 	{gpio_led_init, DEV_ON_BASEBOARD, PROFILE_ALL},
 	{card_init, DEV_ON_BASEBOARD, PROFILE_ALL},
+	{enbale_lcd_power, DEV_ON_BASEBOARD, PROFILE_ALL},
+	{beeper_init, DEV_ON_BASEBOARD, PROFILE_ALL},
         {NULL, 0, 0},
 };
 
@@ -1068,10 +1097,11 @@ static struct i2c_board_info __initdata am335x_i2c0_boardinfo[] = {
 	{
 		I2C_BOARD_INFO("rx8025", 0x32),
 	},
-
+#if 0
 	{
 		I2C_BOARD_INFO("sgtl5000", 0x0A),
 	},
+#endif
 #if 0
         {
                 I2C_BOARD_INFO("ch7033", 0x76),

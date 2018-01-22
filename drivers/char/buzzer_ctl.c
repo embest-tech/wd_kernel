@@ -32,7 +32,7 @@
 #include <linux/delay.h>
 
 #define GPIO_TO_PIN(bank, gpio) (32 * (bank) + (gpio))
-#define BUZZER_CTL GPIO_TO_PIN(3, 19)
+#define BUZZER_CTL GPIO_TO_PIN(1, 12)
 static int buzzer_state;
 
 static ssize_t buzzer_ctl_read(struct file *filp, char *buf,size_t count,loff_t *f_ops)
